@@ -20,21 +20,7 @@
 
     </ListView>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="40dp">
-
-
-        <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:hint="@string/newtask_hint"
-            android:id="@+id/newtask_text"/>
-
-        <include layout="@layout/floating_action_button" />
-    </LinearLayout>
+    <include layout="@layout/new_task" />
 
 
 

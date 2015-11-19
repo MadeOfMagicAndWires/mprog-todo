@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="40dp"
+    android:orientation="horizontal">
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:hint="@string/newtask_hint"
+        android:id="@+id/newtask_text"/>
+
+    <include layout="@layout/floating_action_button" />
+
+</LinearLayout>
