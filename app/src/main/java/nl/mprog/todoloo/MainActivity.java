@@ -59,7 +59,13 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_clear) {
+            removeAllTasks();
+            return true;
+        }
+
+        if (id == R.id.action_quit) {
+            finish();
             return true;
         }
 
@@ -76,43 +82,6 @@ public class MainActivity extends AppCompatActivity {
         writeTasks();
 
     }
-
-    /**
-     * Adds an item to the tasklist and refreshes the List- and EditText views
-     * Will also remove the dummy task 'Add a new task' if it was present.
-     * @param view floating action button, not actually used.
-     */
-
-    public void addTask(View view) {
-
-        //Get task from EditText view, and remove all newlines
-        //This is necessary to properly save each task,
-        // otherwise it'd be read as two separate tasks on restart.
-        EditText taskView = (EditText) findViewById(R.id.newtask_text);
-        String newtask = taskView.getText().toString();
-        newtask = newtask.replaceAll("\n", " ");
-        Log.v("newtask", newtask);
-
-
-        //if the new task is an empty string, show a message to the user and don't add anything
-        //to the task list. Otherwise, just add it to the task list
-        if(newtask.equals("")) {
-            Snackbar.make(taskView, R.string.empty_task, Snackbar.LENGTH_SHORT).show();
-        }
-        else {
-            tasks.add(newtask);
-
-            //if there were no tasks present, remove the dummy task and
-            //update noTask boolean.
-            removeDummyTask();
-
-            //Update listView and reset EditText
-            tasksAdapter.notifyDataSetChanged();
-            taskView.setText("");
-        }
-    }
-
-
 
     /**
      *  Tries to Read tasks from the file 'tasks' and initializes the List from it.
@@ -184,6 +153,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Adds an item to the tasklist and refreshes the List- and EditText views
+     * Will also remove the dummy task 'Add a new task' if it was present.
+     * @param view floating action button, not actually used.
+     */
+
+    public void addTask(View view) {
+
+        //Get task from EditText view, and remove all newlines
+        //This is necessary to properly save each task,
+        // otherwise it'd be read as two separate tasks on restart.
+        EditText taskView = (EditText) findViewById(R.id.newtask_text);
+        String newtask = taskView.getText().toString();
+        newtask = newtask.replaceAll("\n", " ");
+        //Log.v("newtask", newtask);
+
+
+        //if the new task is an empty string, show a message to the user and don't add anything
+        //to the task list. Otherwise, just add it to the task list
+        if(newtask.equals("")) {
+            Snackbar.make(taskView, R.string.empty_task, Snackbar.LENGTH_SHORT).show();
+        }
+        else {
+            tasks.add(newtask);
+
+            //if there were no tasks present, remove the dummy task and
+            //update noTask boolean.
+            removeDummyTask();
+
+            //Update listView and reset EditText
+            tasksAdapter.notifyDataSetChanged();
+            taskView.setText("");
+        }
+    }
+
+    /**
      * Removes a task from the task list
      * If no tasks remain after the current task is removed,
      * then it adds the dummy task 'Add a new task'
@@ -204,6 +208,11 @@ public class MainActivity extends AppCompatActivity {
         else {
             return false;
         }
+    }
+
+    public void removeAllTasks() {
+        tasks.clear();
+        tasksAdapter.notifyDataSetChanged();
     }
 
     /**

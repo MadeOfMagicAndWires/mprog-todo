@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">TODOLOO</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_clear">Clear tasks</string>
+    <string name="action_quit">Quit app</string>
     <string name="newtask_hint">New task: make an app</string>
     <string name="submit_new_task">Add</string>
     <string name="empty_task">Can\'t add an empty task</string>
